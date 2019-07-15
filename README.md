@@ -110,6 +110,8 @@ The rasterization of a line consists of determining the pixels located between a
 
 However, it is not so simple, because in the case of a diagonal line we can have a low density in the line, so that the density is as uniform as possible, we must select the largest possible number of pixels between the two extreme pixels of the line, the nearest pixels.
 
+#### Bresenham Algorithm
+
 For the line drawing, we will use the Bresenham algorithm, since it has greater precision in the results and the execution speed, when its ends are located in the pixels ** P1 ** and ** P2 ** of coordinates ** (x1 , y1) ** and ** (x2, y2) **, respectively.
 
 This algorithm uses only integer arithmetic, and incrementally calculates the pixels that best approximate the ideal line, and therefore allows for greater performance. The algorithm is based on the criterion of the midpoint.
@@ -159,184 +161,79 @@ void MyGlDraw(void) {
 
 <p align="center">
 	<br>
-	<img src="./prints/BresenhamLines.png"/ width=512px height=512px>
-	<h5 align="center">Image 6 - Bresenham for all octants.</h5>
+	<img src="./prints/BresenhamLines.png"/ width=512px height=540px>
+	<h5 align="center">Image 7 - Bresenham for all octants.</h5>
 	<br>
 </p>
 
 
-#### Digital Differential Analyzer (DDA)
-Digital Differential Analyzer (DDA) algorithm is the simple line generation algorithm.
+### Linear Color Interpolation
 
-Now let's look more close the DDA Algorithm.
+Color interpolation is commonly used in graphic computing, mainly used in object rasterization, in this work we will use in the implementation of the Bresenham algorithm in the DrawLine function. We need to take into account, first, the size of the line, for proper interpolation, this is of extra importance because we do not want an incorrect interpolation. Let's give an overview of the interpolation methods to later detail, and later do a case study. Interpolation is a technique that "fills a gap" between two numbers. Most APIs expose linear interpolation based on three parameters: the starting point X1, Y1, and the end point X2, Y2 and a value value between 0 and 1 that moves along the segment that connected them: color = (X1 (X1, Y1) = (X2, Y2) - (X1, Y1)) * size When t = 1, then (X1, Y1) , Y2). The beauty of this formula is that it is easy to understand, efficient to implement, and works in any dimension. The dimensions only require reading independently the X and Y components. It always returns points on the line connecting (X1, Y1) and (X2, Y2), regardless of the number of dimensions.
+
+The main idea is to first calculate the size of the line with respect to its points, for this we use the Function: **final_size = √(((x2-x1)*(x2-x1))+((y2-y1)*(y2-y1)))**; Having the size of the line in hand, we calculate its relation by the size of the line at the moment, that is, a division of initial size at the end, with this we have a variation between 0 ~ 1; Then we get a simple incremental calculation, since it is in loop in for, **size = (current_size++)/final_size**; 
+
+<p align="center">
+	<br>
+	<img src="./prints/Interpolar.png"/ width=512px height=173px>
+	<h5 align="center">Image 8 - Interpolate function.</h5>
+	<br>
+</p>
+
+
+Now we can calculate the color of each pixel, sent to the PutPixel function, as we can see in **Image 9**.
+
 ```C++
-void ddaAlgorithm(int x1, int y1, int x2, int y2, std::vector<int>& myRGBA) {
-  float dx = x2-x1;
-  float dy = y2-y1;
-
-  float m = dy/dx;
-  float b = y1 - (m*x1);
-
-  int j = 0;
-  for (size_t i = 0; i < dx; i++) {
-    colorInterpolation(i, &j, dx, &myRGBA);
-    putPixel(x1+i, round(m*(x1+i)+b), myRGBA);
-  }
+void DrawLine(int x1, int y1, int x2, int y2, colorRGBA pixRGBA1, colorRGBA pixRGBA2){
+...
+	current_size++;                                                                                                                         color = interpolate(pixRGBA1,pixRGBA2, current_size/final_size); 
+	PutPixel(xWidth, yHeight,color);
+...
 }
 ```
-The algorithm above describe:
-1. dx is the variation/range between x2 and x1 points.
-2. dy is the variation/range between y2 and y1 points.
-3. m is the coefficient of the line. 
-4. b is the linear coefficient of the line.
-
-The image describes a line drawn on the screen using the DDA Algorithm. 
-<p align="center">
-	<br>
-	<img src="./prints/lineDDA.png"/ width=510px height=540px>
-	<h5 align="center">Figure 3 - Line drawn with DDA</h5>
-	<br>
-</p>
-
-The DDA Algorithm only draws in the first quadrant as you can see in the image below and is a problem if you want to draw on other areas of the screen. 
 
 <p align="center">
 	<br>
-	<img src="./prints/interpolationDDA.png"/ width=510px height=540px>
-	<h5 align="center">Figure 4 - Lines in the first quadrant</h5>
+	<img src="./prints/BresenhamInterpolar.png"/ width=600px height=90px>
+	<h5 align="center">Image 10 - DrawTriangle with Color Interpolation.</h5>
 	<br>
 </p>
 
----
-
-#### Bresenham Algorithm
-The Bresenham algorithm is another incremental scan conversion algorithm. The big advantage of this algorithm is that, it uses only integer calculations. Moving across the x axis in unit intervals and at each step choose between two different y coordinates.
-
-Now let's look more close the Bresenham Algorithm.
 ```C++
-  int dx = x2-x1;
-  int dy = y2-y1;
-  int d = 2*dy-dx;
-  int incr_e = 2 * dy;
-  int incr_ne = 2 * (dy-dx);
-  int x = x1;
-  int y = y1;
-  putPixel(x,y, myRGBA);
-
-  int j = 0;
-  while(x < x2) {
-    if(d <= 0) {
-      d += incr_e;
-      x++;
-    } else {
-      d += incr_ne;
-      x++;
-      y++;
-    }
-    colorInterpolation(x, &j, x2, &myRGBA);
-    putPixel(x, y, myRGBA);
-  }
-```
-However, the algorithm above only draws lines for the first octant like the DDA, that is, lines that are between 0º and 45º. To better exemplify a screenshot of the above running algorithm can be seen below.
-
-<p align="center">
-	<br>
-	<img src="./prints/bresenhamAlgorithm.png"/ width=510px height=540px>
-	<h5 align="center">Figure 5 - Line drawn with Bresenham</h5>
-	<br>
-</p>
-
-You can see that we have a problem however there are techniques that can draw at all quadrants of screen. this techniques is based on the differences of | DX | and | DY | related to 0. As you can see below a better demonstration of this technique.
-
-<p align="center">
-	<br>
-	<img src="./prints/bresenhamGeneralization.png"/ width=510px height=540px>
-	<h5 align="center">Figure 6 - Technical representation</h5>
-	<br>
-</p>
-
-Using this technique we have achieved the results below:
-
-<p align="center">
-	<br>
-	<img src="./prints/allQuadrants.png"/ width=510px height=540px>
-	<h5 align="center">Figure 7 - All quadrants</h5>
-	<br>
-</p>
-
----
-
-## Drawing Triangles
-After we solve the problem of the quadrants we can now draw triangles by the fact that we can use all quadrants of the screen.
-```C++
-void drawTriangle(Vertex first, Vertex second, Vertex third, std::vector<int>& rgba) {
-  bresenhamAlgorithm(first, rgba);
-  bresenhamAlgorithm(second, rgba);
-  bresenhamAlgorithm(third, rgba);
+void MyGlDraw(void) { 
+	DrawTriangle(128,128,384,384,128,384,red,blue,gree); 
+	DrawTriangle(160,128,384,352,384,128,red,blue,gree); 
+	DrawTriangle(200,100,300,100,250,50,red,blue,gree);
 }
 ```
+
 <p align="center">
 	<br>
-	<img src="./prints/triangle.png"/ width=510px height=540px>
-	<h5 align="center">Figure 8 - Triangle representation</h5>
+	<img src="./prints/Triangle.png"/ width=512px height=540px>
+	<h5 align="center">Image 11 - Drawing triangles.</h5>
 	<br>
 </p>
+
 
 ---
 
 ## Conclusion
 
-### Results
-As we can see that the whole project gives satisfactory results and is able to draw pixels, lines and basic geometric shapes. However, there are some bugs in the interpolationColor function, meaning the color strings are not perfect and this needs a future solution.
+### Results and discussion
+Rasterizing points provides a myriad of possibilities in computer graphics, a straight-line algorithm, the Bresenham is of great utility and efficiency.
 
-### Challenges encountered
-The great concept of how the Bresenham algorithm worked was the first challenge to understand and the second was the technique that allowed us to draw in all quadrants on the screen.
+### Difficulties encountered
+Difficulties was in the implementation of the Bresenham algorithm and color interpolation, the main difficulty with Bresenham was with respect to the eight octants, after much research and reading, it was possible to write a valid algorithm for all octants.
+
+Regarding color interpolation. Even following Foley, and the information on Linear interpolation in stackoverflow, continued to present some errors and simply did not work, since the final calculation always resulted in 0.00001, then the algorithm was changed, and only adding an incremental interpolation with respect to the size of the line and the current size of the line.
 
 ---
 
 ### References
 
-https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
-http://www.univasf.edu.br/~jorge.cavalcanti/comput_graf04_prim_graficas2.pdf
-https://www.tutorialspoint.com/computer_graphics/line_generation_algorithm.htm
-
----
-
-Toolkit: OpenGL | Glut | Computer Graphic | C++
-
-## Requirements ###
-
-* *[A Unix Environment](https://www.ubuntu.com/)** :white_check_mark:
-* *[C++ Compiler with support for standard C11]()** :white_check_mark:
-
-## Build Instructions ###
-
-**Obs.: The following instructions were tested on Ubuntu distribution.**
-
-1. Clone de project.
-
-2. Move to the desired project
-
-3. Invoke the makefile
-
-```
-$> git clone https://github.com/ThiagoLuizNunes/CG-Assignments.git
-$> cd cg-framework
-$> make 
-```
-
-## Execution Instructions ##
-* In the cg-framework.
-* Run the created executable file.
-
-```
-$> ./cg-task
-```
-
-## Contributors
-
-* Thiago Luiz Pereira Nunes ([ThiagoLuizNunes](https://github.com/ThiagoLuizNunes)) thiago.luiz@lavid.ufpb.br
-
->Created By **[ThiagoLuizNunes](https://www.linkedin.com/in/thiago-luiz-507483112/)** 2017.
+1.  Anotações de Aula do Prof. Christian Azambuja Pagot 
+2.  http://tech-algorithm.com/articles/drawing-line-using-bresenham-algorithm/ (07/2019)
+3.  https://www.geeksforgeeks.org/bresenhams-line-generation-algorithm/ (07/2019)
+4.  http://www.edepot.com/algorithm.html (07/2019)
 
 ---
