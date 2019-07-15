@@ -47,12 +47,7 @@ Understanding this, let's use the pointer **FBptr**, which initially points to t
 First, let's draw some random pixels on the screen, as we can see in **The image 1**.
 
 
-<p align="center">
-	<br>
-	<img src="./prints/screenshot-234832.png"/ width=600px height=400px>
-	<h5 align="center">Image 1 - Random points</h5>
-	<br>
-</p>
+
 
 Now let's look more close the function destined to execute the point rasterization.
 ```C++
@@ -72,13 +67,9 @@ void PutPixel(int x, int y, colorRGBA cor){
 		FBptr[X_Y_IMAGE_WIDTH + 3] = cor.a; 
 	}
 
-}
-
-void MyGlDraw(void) { 
-            PutPixel(int xWidth, int yHeight, pixRGBA); 
-}      
-
+}    
 ```
+
 The function above describes:
 1. xWidth is the position of the pixel related the screen width.
 2. yHeight is the position of the pixel related the screen height.
@@ -86,10 +77,29 @@ The function above describes:
 
 The RGBA standard  to require four bytes. Each byte it is destined for the primaries color RGBA that mean RED, GREEN, BLUE and ALPHA. With this function we can draw a point on the screen like the below picture show it.
 
+```C++
+void MyGlDraw(void) { 
+            PutPixel(int xWidth, int yHeight, pixRGBA); 
+}      
+```
 <p align="center">
 	<br>
-	<img src="./prints/putPixel.png"/ width=510px height=540px>
-	<h5 align="center">Figure 2 - Pixel drawn on screen</h5>
+	<img src="./prints/screenshot-234832.png"/ width=512px height=512px>
+	<h5 align="center">Image 1 - Random points</h5>
+	<br>
+</p>
+
+
+```C++
+void MyGlDraw(void) { 
+           PutPixel( rand()%512,rand()%512,cor1); 
+}
+
+```
+<p align="center">
+	<br>
+	<img src="./prints/screenshot-from-235426.png"/ width=510px height=540px>
+	<h5 align="center">Image 2 - Rand Pixel</h5>
 	<br>
 </p>
 
