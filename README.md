@@ -10,15 +10,12 @@ Normally, graphs are defined through geometric primitives such as points, lines,
 
 This article is about Activity 1 of the subject of Introduction to Computer Graphics, taught by Prof. Christian Pagot.
 
-
-<p class="western" style="text-align: justify;" align="justify"><strong>Introdução</strong></p>
-<p class="western" style="text-align: justify;" align="justify">Este relatório é sobre o  trabalho 1 da disciplina de Introdução à Computação Gráfica, ministrada pelo Prof. Christian Pagot, no período 2016.2.</p>
-<p style="text-align: justify;"><strong>Rasterização de um Ponto (Pixel) na tela</strong></p>
-<p style="text-align: justify;">Um ponto em computação gráfica, no caso, pixel, tem as seguintes propriedades:</p>
-
+<p style="text-align: justify;"><strong>Rasterizing a Point (Pixel) on the screen</strong></p>
+<p style="text-align: justify;">A point in computing, in this case, pixel, has the following properties:</p>
+<br>
 <ul style="text-align: justify;">
-	<li>Posição no plano e</li>
-	<li>Cor.</li>
+	<li>Position in plan</li><br>
+	<li>Color</li>
 </ul>
 <p style="text-align: justify;">Cada dispositivo (monitor), tem suas próprias especificações de hardware, e o tamanho do pixel vai depender da resolução gráfica e tamanho físico do dispositivo.
 As operações de manipulação de pixels são essenciais, pois a partir dessa manipulação, imagens são construídas ou alteradas.
