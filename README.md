@@ -10,8 +10,7 @@ Normally, graphs are defined through geometric primitives such as points, lines,
 
 This article is about Activity 1 of the subject of Introduction to Computer Graphics, taught by Prof. Christian Pagot.
 
-<p style="text-align: justify;"><strong>Resumo</strong></p>
-<p class="western" style="text-align: justify;" align="justify"><span style="font-family: Arial, serif;"><span style="font-size: medium;">Normalmente, gráficos são definidos através de primitivas geométricas como: pontos, retas, círculos, textos etc. Pode parecer simples traçar uma reta no vídeo, no entanto, esse tipo de rotina não é tão simples quanto parece. Visto isso, vamos desenvolver funções em conjunto com o framwork, cuja, faz escrita em memoria de vídeo para realizar estas tarefas, e realizar uma análise de melhorias quando possível, isso é importante também para criar aplicações mais eficientes.</span></span> Este post consiste em implementar algoritmos de rasterização para pontos e linhas em linguagem C/C++ juntamente com as bibliotecas GLUT e OpenGL utilizando o Framework disponibilizado previamente pelo professor.</p>
+
 <p class="western" style="text-align: justify;" align="justify"><strong>Introdução</strong></p>
 <p class="western" style="text-align: justify;" align="justify">Este relatório é sobre o  trabalho 1 da disciplina de Introdução à Computação Gráfica, ministrada pelo Prof. Christian Pagot, no período 2016.2.</p>
 <p style="text-align: justify;"><strong>Rasterização de um Ponto (Pixel) na tela</strong></p>
