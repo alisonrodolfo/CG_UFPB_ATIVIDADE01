@@ -92,13 +92,13 @@ void MyGlDraw(void) {
 
 ```C++
 void MyGlDraw(void) { 
-           PutPixel( rand()%512,rand()%512,cor1); 
+           PutPixel( rand()%512,rand()%512, pixRGBA); 
 }
 
 ```
 <p align="center">
 	<br>
-	<img src="./prints/screenshot-from-235426.png"/ width=510px height=540px>
+	<img src="./prints/screenshot-from-235426.png"/ width=512px height=512px>
 	<h5 align="center">Image 2 - Rand Pixel</h5>
 	<br>
 </p>
@@ -106,7 +106,64 @@ void MyGlDraw(void) {
 ---
 
 ### Lines Rasterization
-The task of drawing a pixel on the screen was a bit easy, right? Now, we have a challenge that is to draw a line and this task is not as easy as you think, but to help us, there are some algorithms that can do this for us, however it is very important to understand them.
+The rasterization of a line consists of determining the pixels located between a start point and an end, which should fill this segment of the line as evenly as possible in a device (monitor), and can be vertical, horizontal or diagonal.
+
+However, it is not so simple, because in the case of a diagonal line we can have a low density in the line, so that the density is as uniform as possible, we must select the largest possible number of pixels between the two extreme pixels of the line, the nearest pixels.
+
+For the line drawing, we will use the Bresenham algorithm, since it has greater precision in the results and the execution speed, when its ends are located in the pixels ** P1 ** and ** P2 ** of coordinates ** (x1 , y1) ** and ** (x2, y2) **, respectively.
+
+This algorithm uses only integer arithmetic, and incrementally calculates the pixels that best approximate the ideal line, and therefore allows for greater performance. The algorithm is based on the criterion of the midpoint.
+
+Após a decisão de qual pixel será considerado, deve-se atualizar e utilizar o valor do algoritmo de decisão. Se foi o último pixel escolhido, M será incrementado somente na direção x .
+
+**Image 3**, a simplified version of the Bresenham Algorithm. For more complex operations, we will write the improved Bresenham, in **Image 6**, which inverts the points.
+
+<p align="center">
+	<br>
+	<img src="./prints/MidPointLine.png"/ width=512px height=512px>
+	<h5 align="center">Image 3 - Bresenham</h5>
+	<br>
+</p>
+
+<p align="center">
+	<br>
+	<img src="./prints/BresenhamPadrao.png"/ width=512px height=304px>
+	<h5 align="center">Image 4 - Bresenham padrão</h5>
+	<br>
+</p>
+
+In fact, the Bresenham algorithm, in this case, using this framwork, draws only on the first octant. So we need to improve the code for use in this framwork, we can observe the new result in **Image 7**.
+
+<p align="center">
+	<br>
+	<img src="./prints/Octantes.png"/ width=248px height=242px>
+	<h5 align="center">Image 5 - Octants</h5>
+	<br>
+</p>
+
+<p align="center">
+	<br>
+	<img src="./prints/Bresenham.png"/ width=622px height=922px>
+	<h5 align="center">Image 6 - Bresenham algorithm for all octants.</h5>
+	<br>
+</p>
+
+```C++
+void MyGlDraw(void) { 
+	DrawLine(512,0,0,512,pixRGBA1); 
+	DrawLine(256,0,256,512,pixRGBA2); 
+	DrawLine(0,0,512,512,pixRGBA3); 
+	DrawLine(0,256,512,256,pixRGBA4);
+}
+```
+
+<p align="center">
+	<br>
+	<img src="./prints/BresenhamLines.png"/ width=512px height=512px>
+	<h5 align="center">Image 6 - Bresenham for all octants.</h5>
+	<br>
+</p>
+
 
 #### Digital Differential Analyzer (DDA)
 Digital Differential Analyzer (DDA) algorithm is the simple line generation algorithm.
