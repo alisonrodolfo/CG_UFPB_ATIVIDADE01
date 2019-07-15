@@ -29,6 +29,8 @@ In addition, we can construct graphical elements more complex than a point, but,
 <p style="text-align: justify;">Understanding this, let's use the pointer <b>FBptr</b>, which initially points to the beginning of memory (0,0), with it, we will be able to point the place where we will assign the color of the Pixel.</p>
 <p style="text-align: justify;">First, let's draw some random pixels on the screen, as we can see in <strong>The image 1</strong>.</p>
 
+
+
 <blockquote>
 <code>void MyGlDraw(void) { 
 	PutPixel(100,100,cor1);
