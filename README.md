@@ -5,7 +5,7 @@ Alison R. M. Barreiro - 11328393
 
 * [Abstract](#Abstract)
 * [Introduction](#introduction)
-* [Points Rasterization](#points-rasterization)
+* [Rasterizing a Point (Pixel) on the screen](#Rasterizing-a-Point-(Pixel)-on-the-screen)
 * [Digital Differential Analyzer](#digital-differential-analyzer)
 * [Bresenham Algorithm](#bresenham-algorithm)
 * [Drawing Triangles](#drawing-triangles)
