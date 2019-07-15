@@ -30,12 +30,12 @@ In addition, we can construct graphical elements more complex than a point, but,
 <p style="text-align: justify;">First, let's draw some random pixels on the screen, as we can see in <strong>The image 1</strong>.</p>
 
 <blockquote>
-void MyGlDraw(void) { <br>
-		PutPixel(100,100,cor1);<br>
-	}
-	
-</blockquote><br>
-	<center><p style="text-align: center;"><img class="aligncenter wp-image-33 size-full" src="https://barreirocg.files.wordpress.com/2017/02/screenshot-from-2017-02-20-234832.png" alt="screenshot-from-2017-02-20-234832" width="512" height="540" />Figura 1 - Pontos aleatórios.</p></center>
+<code>void MyGlDraw(void) { 
+	PutPixel(100,100,cor1);
+}</code>
+</blockquote>
+
+	<center><p style="text-align: center;"><img class="aligncenter wp-image-33 size-full" src="https://barreirocg.files.wordpress.com/2017/02/screenshot-from-2017-02-20-234832.png" alt="screenshot-from-2017-02-20-234832" width="512" height="540" /><br>Image 1 - Pontos aleatórios.</p></center>
 
 <p style="text-align: justify;">Na <strong>Figura 2</strong>, podemos observar a arte de que a matemática em conjunto com a computação gráfica pode proporcionar.</p>
 	
