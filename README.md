@@ -186,7 +186,10 @@ Now we can calculate the color of each pixel, sent to the PutPixel function, as 
 ```C++
 void DrawLine(int x1, int y1, int x2, int y2, colorRGBA pixRGBA1, colorRGBA pixRGBA2){
 ...
-	current_size++;                                                                                                                         color = interpolate(pixRGBA1,pixRGBA2, current_size/final_size); 
+	current_size++;  
+	
+	color = interpolate(pixRGBA1,pixRGBA2, current_size/final_size); 
+	
 	PutPixel(xWidth, yHeight,color);
 ...
 }
