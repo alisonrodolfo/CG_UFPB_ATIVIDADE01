@@ -17,17 +17,17 @@ This article is about Activity 1 of the subject of Introduction to Computer Grap
 	<li>Position in plan</li><br>
 	<li>Color</li>
 </ul>
-<p style="text-align: justify;">Cada dispositivo (monitor), tem suas próprias especificações de hardware, e o tamanho do pixel vai depender da resolução gráfica e tamanho físico do dispositivo.
-As operações de manipulação de pixels são essenciais, pois a partir dessa manipulação, imagens são construídas ou alteradas.
-Além disso, podemos construir elementos gráficos mais complexos que um ponto, mas, existe uma uma sequência de ações e algoritmos para que possam ser construídos.</p>
+<p style="text-align: justify;">Each device (monitor) has its own hardware specifications, and the pixel size will depend on the graphic resolution and physical size of the device.
+Pixel manipulation operations are essential because from this manipulation, images are constructed or altered.
+In addition, we can construct graphical elements more complex than a point, but, there is a sequence of actions and algorithms so that they can be constructed.</p>
 
 <ol style="text-align: justify;">
-	<li>Função PutPixel();</li>
+	<li>Function PutPixel();</li>
 </ol>
-<p style="text-align: justify;">A função rasteriza um ponto na memória de vídeo,  recebendo como parâmetros a posição do pixel na tela (x,y) e sua cor (RGBA). Cada pixel ocupa 4 bytes na memoria de vídeo, cuja, cada byte, corresponde a um valor RGBA. A memoria de video pode ser representada como um vetor linear, tendo 4 Vezes o tamanho da tela do dispositivo. Com isso, obtemos a Seguinte função:</p>
-<p style="text-align: justify;"><strong>offset = (x + y * Largura_da_Imagem) * 4;</strong></p>
-<p style="text-align: justify;">Entendendo isso, vamos utilizar o ponteiro <b>FBptr</b>, cuja, inicialmente aponta para o inicio de memoria (0,0), com ele, vamos poder apontar o local onde vamos atribuir a cor do Pixel.</p>
-<p style="text-align: justify;">Primeiramente, vamos desenhar alguns pixels aleatórios na tela, como podemos observar na <strong>Figura 1</strong>.</p>
+<p style="text-align: justify;">The function rasterizes a point in the video memory, receiving as parameters the position of the pixel on the screen (x, y) and its color (RGBA). Each pixel occupies 4 bytes in the video memory, whose each byte corresponds to an RGBA value. The video memory can be represented as a linear vector, having 4 times the screen size of the device. With this, we get the following function:</p>
+<p style="text-align: justify;"><strong>offset = (x + y * Image_Width) * 4;</strong></p>
+<p style="text-align: justify;">Understanding this, let's use the pointer <b>FBptr</b>, which initially points to the beginning of memory (0,0), with it, we will be able to point the place where we will assign the color of the Pixel.</p>
+<p style="text-align: justify;">First, let's draw some random pixels on the screen, as we can see in <strong>The image 1</strong>.</p>
 
 <blockquote>
 <p style="text-align: left;"><span style="color: #339966;">void</span> MyGlDraw(<span style="color: #339966;">void)</span> {
