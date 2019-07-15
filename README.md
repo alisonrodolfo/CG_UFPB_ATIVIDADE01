@@ -194,7 +194,7 @@ void DrawLine(int x1, int y1, int x2, int y2, colorRGBA pixRGBA1, colorRGBA pixR
 
 <p align="center">
 	<br>
-	<img src="./prints/BresenhamInterpolar.png"/ width=600px height=90px>
+	<img src="./prints/BresenhamInterpolar.png"/ width=512px height=540px>
 	<h5 align="center">Image 10 - DrawTriangle with Color Interpolation.</h5>
 	<br>
 </p>
