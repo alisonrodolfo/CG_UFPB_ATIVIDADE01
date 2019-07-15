@@ -35,7 +35,7 @@ In addition, we can construct graphical elements more complex than a point, but,
 }</code>
 </blockquote>
 
-	<center><p style="text-align: center;"><img class="aligncenter wp-image-33 size-full" src="https://barreirocg.files.wordpress.com/2017/02/screenshot-from-2017-02-20-234832.png" alt="screenshot-from-2017-02-20-234832" width="512" height="540" /><br>Image 1 - Pontos aleatórios.</p></center>
+<center><p><img class="aligncenter wp-image-33 size-full" src="https://barreirocg.files.wordpress.com/2017/02/screenshot-from-2017-02-20-234832.png" alt="screenshot-from-2017-02-20-234832" width="512" height="540" /><br>Image 1 - Pontos aleatórios.</p></center>
 
 <p style="text-align: justify;">Na <strong>Figura 2</strong>, podemos observar a arte de que a matemática em conjunto com a computação gráfica pode proporcionar.</p>
 	
