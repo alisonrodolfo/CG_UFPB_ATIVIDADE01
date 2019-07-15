@@ -50,17 +50,34 @@ First, let's draw some random pixels on the screen, as we can see in **The image
 <p align="center">
 	<br>
 	<img src="./prints/matrix.png"/ width=600px height=400px>
-	<h5 align="center">Figure 1 - Rasterization representation</h5>
+	<h5 align="center">Image 1 - Random points</h5>
 	<br>
 </p>
 
 Now let's look more close the function destined to execute the point rasterization.
 ```C++
-void putPixel(int xWidth, int yHeight, std::vector<int>& myRGBA) {
-	for (size_t i = 0; i < 4; i++) {
-	FBptr[xWidth*4+i + yHeight*4*IMAGE_WIDTH] = myRGBA.at(i);
+#define X_Y_IMAGE_WIDTH (x + y * IMAGE_WIDTH) * 4
+
+void PutPixel(int x, int y, colorRGBA cor){
+
+
+	if( x < 0  || y < 0  || x > IMAGE_HEIGHT || y > IMAGE_WIDTH)
+	{
+		return;
+	
+      	} else {
+		FBptr[X_Y_IMAGE_WIDTH + 0] = cor.r;
+		FBptr[X_Y_IMAGE_WIDTH + 1] = cor.g;
+		FBptr[X_Y_IMAGE_WIDTH + 2] = cor.b;
+		FBptr[X_Y_IMAGE_WIDTH + 3] = cor.a; 
 	}
+
 }
+
+void MyGlDraw(void) { 
+            PutPixel(int xWidth, int yHeight, pixRGBA); 
+}      
+
 ```
 The function above describes:
 1. xWidth is the position of the pixel related the screen width.
