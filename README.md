@@ -37,7 +37,9 @@ PutPixel(<span style="color: #ff00ff;">100</span>,<span style="color: #ff00ff;">
 	<center><p style="text-align: center;"><img class="aligncenter wp-image-33 size-full" src="https://barreirocg.files.wordpress.com/2017/02/screenshot-from-2017-02-20-234832.png" alt="screenshot-from-2017-02-20-234832" width="512" height="540" />Figura 1 - Pontos aleatórios.</p></center>
 </blockquote>
 <p style="text-align: justify;">Na <strong>Figura 2</strong>, podemos observar a arte de que a matemática em conjunto com a computação gráfica pode proporcionar.</p>
-
+	void MyGlDraw(void) { 
+		PutPixel(100,100,cor1);
+	}
 <blockquote>
 	void MyGlDraw(void) { 
 		PutPixel(100,100,cor1);
