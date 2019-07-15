@@ -32,7 +32,9 @@ Understanding this, let's use the pointer **FBptr**, which initially points to t
 
 First, let's draw some random pixels on the screen, as we can see in **The image 1**.
 
-> `void MyGlDraw(void) { PutPixel(100,100,cor1); }`
+> `   void MyGlDraw(void) { 
+            PutPixel(100,100,cor1); 
+      }`
 
 ![screenshot-from-2017-02-20-234832](https://barreirocg.files.wordpress.com/2017/02/screenshot-from-2017-02-20-234832.png)  
 Image 1 - Pontos aleatórios.
