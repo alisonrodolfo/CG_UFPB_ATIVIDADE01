@@ -1,35 +1,41 @@
-\# First activity of CG UFPB. Alison R. M. Barreiro - 11328393 #Abstract Normally, graphs are defined through geometric primitives such as points, lines, circles, texts, etc. It may seem simple to draw a line in the video, however, this kind of routine is not as simple as it sounds. Given this, we will develop functions in conjunction with framwork, which makes writing in video memory to perform these tasks, and perform an analysis of improvements when possible, this is also important to create more efficient applications. This post consists of implementing raster algorithms for points and lines in C / C ++ language along with the GLUT and OpenGL libraries using the Framework previously made available by the teacher. #Introduction This article is about Activity 1 of the subject of Introduction to Computer Graphics, taught by Prof. Christian Pagot.
+**Resumo**
 
-**Rasterizing a Point (Pixel) on the screen**
+Normalmente, gráficos são definidos através de primitivas geométricas como: pontos, retas, círculos, textos etc. Pode parecer simples traçar uma reta no vídeo, no entanto, esse tipo de rotina não é tão simples quanto parece. Visto isso, vamos desenvolver funções em conjunto com o framwork, cuja, faz escrita em memoria de vídeo para realizar estas tarefas, e realizar uma análise de melhorias quando possível, isso é importante também para criar aplicações mais eficientes. Este post consiste em implementar algoritmos de rasterização para pontos e linhas em linguagem C/C++ juntamente com as bibliotecas GLUT e OpenGL utilizando o Framework disponibilizado previamente pelo professor.
 
-A point in computing, in this case, pixel, has the following properties:
+**Introdução**
 
-  
+Este relatório é sobre o  trabalho 1 da disciplina de Introdução à Computação Gráfica, ministrada pelo Prof. Christian Pagot, no período 2016.2.
 
-*   Position in plan
-  
-*   Color
+**Rasterização de um Ponto (Pixel) na tela**
 
-Each device (monitor) has its own hardware specifications, and the pixel size will depend on the graphic resolution and physical size of the device. Pixel manipulation operations are essential because from this manipulation, images are constructed or altered. In addition, we can construct graphical elements more complex than a point, but, there is a sequence of actions and algorithms so that they can be constructed.
+Um ponto em computação gráfica, no caso, pixel, tem as seguintes propriedades:
 
-1.  Function PutPixel();
+*   Posição no plano e
+*   Cor.
 
-The function rasterizes a point in the video memory, receiving as parameters the position of the pixel on the screen (x, y) and its color (RGBA). Each pixel occupies 4 bytes in the video memory, whose each byte corresponds to an RGBA value. The video memory can be represented as a linear vector, having 4 times the screen size of the device. With this, we get the following function:
+Cada dispositivo (monitor), tem suas próprias especificações de hardware, e o tamanho do pixel vai depender da resolução gráfica e tamanho físico do dispositivo. As operações de manipulação de pixels são essenciais, pois a partir dessa manipulação, imagens são construídas ou alteradas. Além disso, podemos construir elementos gráficos mais complexos que um ponto, mas, existe uma uma sequência de ações e algoritmos para que possam ser construídos.
 
-**offset = (x + y \* Image\_Width) \* 4;**
+1.  Função PutPixel();
 
-Understanding this, let's use the pointer **FBptr**, which initially points to the beginning of memory (0,0), with it, we will be able to point the place where we will assign the color of the Pixel.
+A função rasteriza um ponto na memória de vídeo,  recebendo como parâmetros a posição do pixel na tela (x,y) e sua cor (RGBA). Cada pixel ocupa 4 bytes na memoria de vídeo, cuja, cada byte, corresponde a um valor RGBA. A memoria de video pode ser representada como um vetor linear, tendo 4 Vezes o tamanho da tela do dispositivo. Com isso, obtemos a Seguinte função:
 
-First, let's draw some random pixels on the screen, as we can see in **The image 1**.
+**offset = (x + y \* Largura\_da\_Imagem) \* 4;**
 
-> `void MyGlDraw(void) { PutPixel(100,100,cor1); }`
+Entendendo isso, vamos utilizar o ponteiro **FBptr**, cuja, inicialmente aponta para o inicio de memoria (0,0), com ele, vamos poder apontar o local onde vamos atribuir a cor do Pixel.
 
-![screenshot-from-2017-02-20-234832](https://barreirocg.files.wordpress.com/2017/02/screenshot-from-2017-02-20-234832.png)  
-Image 1 - Pontos aleatórios.
+Primeiramente, vamos desenhar alguns pixels aleatórios na tela, como podemos observar na **Figura 1**.
+
+> void MyGlDraw(void) { PutPixel(100,100,cor1);
+> 
+> }
 
 Na **Figura 2**, podemos observar a arte de que a matemática em conjunto com a computação gráfica pode proporcionar.
 
-> void MyGlDraw(void) { PutPixel( rand()%512,rand()%512,cor1); }
+> void MyGlDraw(void) { PutPixel( rand()%512,rand()%512,cor1);
+> 
+> }
+
+![screenshot-from-2017-02-20-234832](https://barreirocg.files.wordpress.com/2017/02/screenshot-from-2017-02-20-234832.png)Figura 1 - Pontos aleatórios.
 
 ![screenshot-from-2017-02-20-235426](https://barreirocg.files.wordpress.com/2017/02/screenshot-from-2017-02-20-235426.png)
 
