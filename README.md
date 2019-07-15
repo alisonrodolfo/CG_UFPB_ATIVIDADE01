@@ -40,9 +40,10 @@ void MyGlDraw(void) { <br>
 <p style="text-align: justify;">Na <strong>Figura 2</strong>, podemos observar a arte de que a matemática em conjunto com a computação gráfica pode proporcionar.</p>
 	
 <blockquote>
-	void MyGlDraw(void) { 
-		PutPixel(100,100,cor1);
-	}
+	void MyGlDraw(void) {
+PutPixel( rand()%512,rand()%512,cor1);
+
+}
 </blockquote>
 
 <p style="text-align: justify;"><img class="aligncenter wp-image-34 size-full" src="https://barreirocg.files.wordpress.com/2017/02/screenshot-from-2017-02-20-235426.png" alt="screenshot-from-2017-02-20-235426" width="512" height="540" /></p>
