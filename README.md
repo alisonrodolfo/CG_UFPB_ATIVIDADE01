@@ -49,7 +49,7 @@ First, let's draw some random pixels on the screen, as we can see in **The image
 
 <p align="center">
 	<br>
-	<img src="./prints/matrix.png"/ width=600px height=400px>
+	<img src="./prints/screenshot-234832.png"/ width=600px height=400px>
 	<h5 align="center">Image 1 - Random points</h5>
 	<br>
 </p>
