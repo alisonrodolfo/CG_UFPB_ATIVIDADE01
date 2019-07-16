@@ -5,10 +5,12 @@ Alison R. M. Barreiro - 11328393
 
 * [Abstract](#Abstract)
 * [Introduction](#introduction)
-* [Rasterizing a Point (Pixel) on the screen](#Rasterizing-a-Point-(Pixel)-on-the-screen)
-* [Digital Differential Analyzer](#digital-differential-analyzer)
+* [Rasterizing a Point (Pixel) on the screen](#rasterizing-a-point-pixel-on-the-screen)
+* [Lines Rasterization](#lines-rasterization)
 * [Bresenham Algorithm](#bresenham-algorithm)
+* [Linear Color Interpolation](#linear-color-interpolation)
 * [Drawing Triangles](#drawing-triangles)
+* [Extra - Drawing a Curve with Color Interpolation](#drawing-triangles)
 * [Conclusion](#conclusion)
 * [References](#references)
 * [Build Instructions](#build-instructions)
@@ -194,6 +196,9 @@ void DrawLine(int x1, int y1, int x2, int y2, colorRGBA pixRGBA1, colorRGBA pixR
 ...
 }
 ```
+---
+
+
 
 <p align="center">
 	<br>
@@ -202,11 +207,19 @@ void DrawLine(int x1, int y1, int x2, int y2, colorRGBA pixRGBA1, colorRGBA pixR
 	<br>
 </p>
 
+
+### Drawing Triangles
+The algorithm is simple, the DrawTriangle function receives its vertices and passes the DrawLine function, which draws the three lines.
+
+Let's draw some triangles on the screen, for this, just inform its edges and together with the DrawLine Function, as we can see in the image **Image 11**.
+
+
 ```C++
-void MyGlDraw(void) { 
-	DrawTriangle(128,128,384,384,128,384,red,blue,gree); 
-	DrawTriangle(160,128,384,352,384,128,red,blue,gree); 
-	DrawTriangle(200,100,300,100,250,50,red,blue,gree);
+void DrawTriangle(int x1,int y1,int x2,int y2,int x3,int y3,colorRGBA pixRGBA1,colorRGBA pixRGBA2,colorRGBA pixRGBA3){
+	DrawLine(x1,y1,x2,y2,pixRGBA1,pixRGBA2);
+	DrawLine(x2,y2,x3,y3,pixRGBA1,pixRGBA3);
+	DrawLine(x3,y3,x1,y1,pixRGBA3,pixRGBA2);	
+
 }
 ```
 
@@ -214,6 +227,59 @@ void MyGlDraw(void) {
 	<br>
 	<img src="./prints/Triangle.png"/ width=512px height=540px>
 	<h5 align="center">Image 11 - Drawing triangles.</h5>
+	<br>
+</p>
+
+
+---
+
+### Extra - Drawing a Curve with Color Interpolation
+The calculation of this circumference is directly used in the calculation of circles, it is necessary to find an algorithm, which, like the one made for the straight line, but try to minimize the operations and calculate the radius of the circle. Of course, we must use the symmetric nature, we use the one algorithm for the decision point:
+
+*With a circle centered on the origin, forming a curve in the screen, but the center can change to the middle of the screen.
+
+```C++
+
+void CurvePixel (int x,int y,colorRGBA cor)
+{
+	PutPixel( x, y,cor);
+	PutPixel( y, x,cor);
+	PutPixel( y,-x,cor);
+	PutPixel( x,-y,cor);
+	PutPixel(-x,-y,cor);
+	PutPixel(-y,-x,cor);
+	PutPixel(-y, x,cor);
+	PutPixel(-x, y,cor);
+}
+
+void drawCurve(int radius) {
+
+	int x = 0;
+	int y = radius;
+	int d = 1 - radius;
+	float current_size = 0.0, final_size = size(0,400,400,0);
+
+	writeCirclePixel(x, y,cor);
+	while (y > x) {
+	if(d < 0) {
+	// escolher E
+		d += 2 * x + 3;
+	} else {
+		d += 2 * (x-y) + 5;
+		--y;
+	}
+		++x;
+		current_size++;
+		color = interpolate(red,blue, current_size/final_size);
+		CurvePixel(x, y,cor);
+	}
+}
+```
+
+<p align="center">
+	<br>
+	<img src="./prints/screenshot-from-52711.png"/ width=512px height=540px>
+	<h5 align="center">Image 12 - drawCurve.</h5>
 	<br>
 </p>
 
