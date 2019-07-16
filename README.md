@@ -10,7 +10,7 @@ Alison R. M. Barreiro - 11328393
 * [Bresenham Algorithm](#bresenham-algorithm)
 * [Linear Color Interpolation](#linear-color-interpolation)
 * [Drawing Triangles](#drawing-triangles)
-* [Extra - Drawing a Curve with Color Interpolation](#drawing-triangles)
+* [Extra - Drawing a Curve with Color Interpolation](#extra---drawing-a-curve-with-color-interpolation)
 * [Conclusion](#conclusion)
 * [References](#references)
 * [Build Instructions](#build-instructions)
